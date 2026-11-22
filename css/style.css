@@ -366,6 +366,8 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
 .shelf-row__boxes {
   display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
   gap: clamp(10px, 1.7vw, 18px); align-items: end; padding: 0 4px;
+  perspective: 1000px;
+  perspective-origin: 50% 45%;
 }
 .shelf-row__plank {
   position: relative; height: clamp(15px, 1.5vw, 20px); margin-top: -1px;
@@ -391,7 +393,10 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
   border-radius: 3px 3px 2px 2px;
   box-shadow: 5px 6px 0 var(--cat, var(--coral));
   cursor: pointer; outline: none;
-  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+  transform: rotateX(var(--rx, 0deg)) translateY(var(--lift, 0px));
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transition: transform .1s linear, box-shadow .2s var(--ease);
 }
 .snack-box:nth-child(2) { min-height: clamp(192px, 17vw, 226px); }
 .snack-box:nth-child(3) { min-height: clamp(168px, 15vw, 202px); }
@@ -402,7 +407,7 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
 }
 html[data-theme="dark"] .snack-box::before { border-color: rgba(244,236,224,.2); }
 .snack-box:hover, .snack-box:focus-visible {
-  transform: translateY(-5px);
+  --lift: -5px;
   box-shadow: 8px 10px 0 var(--cat, var(--coral));
   z-index: 2;
 }

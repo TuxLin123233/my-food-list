@@ -90,6 +90,8 @@
     toTop: $("#to-top"),
     year: $("#year"),
     updated: $("#updated"),
+    shelfCount: $("#shelf-count"),
+    aboutCount: $("#about-count"),
   };
 
   let searchTimer = 0;
@@ -211,6 +213,7 @@
     els.empty.hidden = list.length > 0;
     updateResultCount(list.length);
     observeReveals(els.shelfUnit);
+    scheduleBoxTilt();
   }
 
   function renderChips() {
@@ -289,6 +292,30 @@
 
   function closeDialog() {
     if (els.dialog.open) els.dialog.close();
+  }
+
+  /* ---------- scroll tilt ---------- */
+
+  let tiltFrame = 0;
+
+  function updateBoxTilt() {
+    if (reduceMotion.matches) return;
+    const boxes = $$(".snack-box", els.shelfUnit);
+    const viewport = window.innerHeight || 800;
+    const anchor = viewport * 0.5;
+    boxes.forEach((box) => {
+      const rect = box.getBoundingClientRect();
+      if (rect.bottom < -160 || rect.top > viewport + 160) return;
+      const boxAnchor = rect.top + rect.height / 2;
+      const progress = Math.max(-1, Math.min(1, (anchor - boxAnchor) / (viewport * 0.72)));
+      box.style.setProperty("--rx", (progress * 9).toFixed(2) + "deg");
+    });
+  }
+
+  function scheduleBoxTilt() {
+    if (reduceMotion.matches) return;
+    cancelAnimationFrame(tiltFrame);
+    tiltFrame = requestAnimationFrame(updateBoxTilt);
   }
 
   /* ---------- toast ---------- */
@@ -429,6 +456,7 @@
 
     window.addEventListener("scroll", () => {
       els.toTop.classList.toggle("is-visible", window.scrollY > 700);
+      scheduleBoxTilt();
     }, { passive: true });
 
     let lastColumns = columns();
@@ -464,7 +492,18 @@
   spinToday();
   observeReveals(document);
 
+  if (!reduceMotion.matches) scheduleBoxTilt();
+  reduceMotion.addEventListener("change", () => {
+    if (reduceMotion.matches) {
+      $$(".snack-box", els.shelfUnit).forEach((box) => box.style.removeProperty("--rx"));
+    } else {
+      scheduleBoxTilt();
+    }
+  });
+
   if (els.year) els.year.textContent = new Date().getFullYear();
+  if (els.shelfCount) els.shelfCount.textContent = `${DATA.stats.snacks} BOXES`;
+  if (els.aboutCount) els.aboutCount.textContent = DATA.stats.snacks;
   if (els.updated && DATA.updated) els.updated.textContent = String(DATA.updated).replace(/-/g, ".");
 
 })();
