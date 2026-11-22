@@ -1,0 +1,93 @@
+# LinSifan 的零食柜
+
+> 只收有包装的、会反复买的零食。
+
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-c5533b?style=flat-square)
+![Snacks](https://img.shields.io/badge/snacks-16-2b241a?style=flat-square)
+![Categories](https://img.shields.io/badge/categories-6-2b241a?style=flat-square)
+![Vanilla JS](https://img.shields.io/badge/vanilla-JS-2b241a?style=flat-square)
+
+**在线访问：<https://tuxlin123233.github.io/my-food-list/>**
+
+<p align="center">
+  <img src="docs/preview-home.jpg" alt="零食柜首页预览" width="100%">
+</p>
+
+## 关于
+
+一个只收集**有包装零食**的个人档案：薯片、饼干、巧克力、糖果、坚果、海苔和肉脯。不收录餐厅，也不收录自己做的菜。
+
+每条记录包含品牌、口味、价格、购买地、首次记录的日期，以及一句当时吃完的想法。回购那一栏比评分更诚实。
+
+当前先放了 **16 条示例数据**，搭好分类、搜索、随机和详情；之后替换 `data/snacks.csv` 并重新构建，就会变成你自己的零食柜。
+
+## 功能
+
+- 16 条示例零食，6 个分类
+- 搜索名字 / 品牌 / 口味 / 笔记
+- 分类筛选、按最近记录 / 评分 / 名字 / 分类排序
+- 「抽一包」随机推荐，今日推荐卡片可点开详情
+- 手账风卡片：纸胶带、硬边影子、包装线稿、评分与回购印章
+- 白天 / 夜宵两套主题，自动记住选择
+- 手机端适配，详情弹窗
+- 页脚显示最后更新日期
+
+## 界面预览
+
+<p align="center">
+  <img src="docs/preview-grid.jpg" alt="零食卡片网格" width="72%">
+  <img src="docs/preview-mobile.jpg" alt="手机端预览" width="22%">
+</p>
+
+<p align="center">
+  <img src="docs/preview-dialog.jpg" alt="零食详情弹窗" width="72%">
+</p>
+
+<p align="center">
+  <img src="assets/og-cover.jpg" alt="分享卡片" width="100%">
+</p>
+
+## 数据与更新
+
+数据源是 `data/snacks.csv`，构建脚本会生成 `js/data.js`。
+
+```bash
+python3 tools/build_site_data.py
+```
+
+CSV 字段：
+
+| 字段 | 说明 |
+| --- | --- |
+| `id` | 编号，比如 `001` |
+| `name` | 零食名 |
+| `brand` | 品牌 |
+| `category` | 分类：膨化 / 饼干 / 巧克力 / 糖果 / 咸味 / 坚果 |
+| `flavor` | 口味 |
+| `rating` | 1–5 分 |
+| `repurchase` | 常备 / 会回购 / 偶尔 / 囤过 |
+| `price` | 价格，比如 `¥8.5 / 70g` |
+| `place` | 购买地 |
+| `date` | 首次记录日期 `YYYY-MM-DD` |
+| `tags` | 标签，用 `\|` 分隔 |
+| `note` | 一句听感 / 吃后感 |
+| `pack` | 包装线稿类型：`chips` / `biscuit` / `chocolate` / `candy` / `nuts` / `savory` |
+
+## 本地预览
+
+```bash
+python3 -m http.server 8000
+```
+
+然后打开 <http://localhost:8000>。
+
+## 技术栈
+
+- 原生 HTML / CSS / JavaScript，无框架、无构建依赖
+- 包装插画为内联 SVG 线稿，不依赖外部图片
+- 数据：CSV → JSON（`tools/build_site_data.py`）
+- 部署：GitHub Pages
+
+## 说明
+
+当前为框架阶段的示例数据，替换 CSV 后即可变成真实收藏。包装线稿是通用插画，不代表具体产品包装。
