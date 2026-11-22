@@ -1,10 +1,10 @@
-# LinSifan 的零食柜
+# 零食柜
 
-> 只收有包装的、会反复买的零食。
+> Lin Sifan 的包装零食档案 · 只收有包装的、会反复买的零食。
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-c5533b?style=flat-square)
-![Snacks](https://img.shields.io/badge/snacks-16-2b241a?style=flat-square)
-![Categories](https://img.shields.io/badge/categories-6-2b241a?style=flat-square)
+![Snacks](https://img.shields.io/badge/snacks-8-2b241a?style=flat-square)
+![Categories](https://img.shields.io/badge/categories-7-2b241a?style=flat-square)
 ![Vanilla JS](https://img.shields.io/badge/vanilla-JS-2b241a?style=flat-square)
 
 **在线访问：<https://tuxlin123233.github.io/my-food-list/>**
@@ -15,15 +15,24 @@
 
 ## 关于
 
-一个只收集**有包装零食**的个人档案：薯片、饼干、巧克力、糖果、坚果、海苔和肉脯。不收录餐厅，也不收录自己做的菜。
+一个只收集**有包装零食**的个人档案：冰品和饮品、辣味、糖果、罐头、膨化、糕点、炒货。不收录餐厅，也不收录自己做的菜。
+
+目前收了 8 样：
+
+- 蜜雪冰城（冰激凌、冰/热美式、无糖、蜜桃四季春）
+- 麻辣王子 · 微麻微辣
+- 小样酸Q糖
+- 粤花牌榄角鲮鱼罐头
+- 大魔王麻酱素毛肚
+- 盼盼家庭号虾条 · 烤肉味
+- 如香惠香绿豆糕
+- 盼盼香瓜子
 
 每条记录包含品牌、口味、价格、购买地、首次记录的日期，以及一句当时吃完的想法。回购那一栏比评分更诚实。
 
-当前先放了 **16 条示例数据**，搭好分类、搜索、随机和详情；之后替换 `data/snacks.csv` 并重新构建，就会变成你自己的零食柜。
-
 ## 功能
 
-- 16 条示例零食，6 个分类
+- 8 样零食，7 个分类
 - 搜索名字 / 品牌 / 口味 / 笔记
 - 分类筛选、按最近记录 / 评分 / 名字 / 分类排序
 - 「抽一包」随机推荐，今日推荐卡片可点开详情
@@ -62,7 +71,7 @@ CSV 字段：
 | `id` | 编号，比如 `001` |
 | `name` | 零食名 |
 | `brand` | 品牌 |
-| `category` | 分类：膨化 / 饼干 / 巧克力 / 糖果 / 咸味 / 坚果 |
+| `category` | 分类：冰品 / 饮品、辣味、糖果、罐头、膨化、糕点、炒货 |
 | `flavor` | 口味 |
 | `rating` | 1–5 分 |
 | `repurchase` | 常备 / 会回购 / 偶尔 / 囤过 |
@@ -70,8 +79,10 @@ CSV 字段：
 | `place` | 购买地 |
 | `date` | 首次记录日期 `YYYY-MM-DD` |
 | `tags` | 标签，用 `\|` 分隔 |
-| `note` | 一句听感 / 吃后感 |
-| `pack` | 包装线稿类型：`chips` / `biscuit` / `chocolate` / `candy` / `nuts` / `savory` |
+| `note` | 一句吃后感 |
+| `pack` | 包装线稿：`drink` / `can` / `cake` / `chips` / `biscuit` / `chocolate` / `candy` / `nuts` / `savory` |
+
+新增分类时，把分类名加进 `tools/build_site_data.py` 的 `CATEGORY_ORDER`，并在 `css/style.css` 的分类色里补一条。
 
 ## 本地预览
 
@@ -90,4 +101,4 @@ python3 -m http.server 8000
 
 ## 说明
 
-当前为框架阶段的示例数据，替换 CSV 后即可变成真实收藏。包装线稿是通用插画，不代表具体产品包装。
+包装线稿是通用插画，不代表具体产品包装；价格和购买地会随时间和门店变化，仅作记录。

@@ -145,6 +145,33 @@
         <ellipse cx="78" cy="102" rx="10" ry="13" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
         <path d="M64 66l4 6M88 76l4 6M74 96l4 6" stroke="currentColor" stroke-width="1" opacity=".5"/>
       </svg>`,
+    drink: `
+      <svg viewBox="0 0 160 140" aria-hidden="true">
+        <path d="M54 42h52l-7 72H61Z" fill="var(--cat)" opacity=".18" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M48 42h64l-4 12H52Z" fill="var(--cat)" opacity=".38" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M34 42h92" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M88 42 108 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="80" cy="76" r="16" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M72 76h16M80 70v12" stroke="currentColor" stroke-width="1.1"/>
+        <path d="M69 103h22" stroke="currentColor" stroke-width="1" opacity=".45"/>
+      </svg>`,
+    can: `
+      <svg viewBox="0 0 160 140" aria-hidden="true">
+        <ellipse cx="80" cy="32" rx="34" ry="9" fill="var(--cat)" opacity=".35" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M46 32v72c0 5 15 9 34 9s34-4 34-9V32" fill="var(--cat)" opacity=".16" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M46 48h68M46 94h68" stroke="currentColor" stroke-width="1" opacity=".5"/>
+        <path d="M68 26h24M74 22h12" stroke="currentColor" stroke-width="1.4" opacity=".7"/>
+        <rect x="60" y="62" width="40" height="20" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M70 72h20" stroke="currentColor" stroke-width="1"/>
+      </svg>`,
+    cake: `
+      <svg viewBox="0 0 160 140" aria-hidden="true">
+        <path d="M44 60h72v48H44Z" fill="var(--cat)" opacity=".16" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M44 60c0-8 8-14 18-14h36c10 0 18 6 18 14" fill="var(--cat)" opacity=".35" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M44 74h72M44 88h72" stroke="currentColor" stroke-width="1" opacity=".5"/>
+        <path d="M60 46v-6M80 46v-8M100 46v-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="80" cy="100" r="5" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/>
+      </svg>`,
     savory: `
       <svg viewBox="0 0 160 140" aria-hidden="true">
         <rect x="40" y="32" width="80" height="84" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6"/>

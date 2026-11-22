@@ -348,12 +348,13 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
 .snack-card__price { font-family: var(--font-mono); font-size: 8px; color: var(--muted); }
 
 /* 分类色 */
-.snack-card[data-category="膨化"], .today[data-category="膨化"], .snack-dialog__art[data-category="膨化"] { --cat: var(--tomato); }
-.snack-card[data-category="饼干"], .today[data-category="饼干"], .snack-dialog__art[data-category="饼干"] { --cat: var(--mustard); }
-.snack-card[data-category="巧克力"], .today[data-category="巧克力"], .snack-dialog__art[data-category="巧克力"] { --cat: var(--brown); }
+.snack-card[data-category="冰品 / 饮品"], .today[data-category="冰品 / 饮品"], .snack-dialog__art[data-category="冰品 / 饮品"] { --cat: var(--blue); }
+.snack-card[data-category="辣味"], .today[data-category="辣味"], .snack-dialog__art[data-category="辣味"] { --cat: var(--tomato); }
 .snack-card[data-category="糖果"], .today[data-category="糖果"], .snack-dialog__art[data-category="糖果"] { --cat: var(--pink); }
-.snack-card[data-category="咸味"], .today[data-category="咸味"], .snack-dialog__art[data-category="咸味"] { --cat: var(--olive); }
-.snack-card[data-category="坚果"], .today[data-category="坚果"], .snack-dialog__art[data-category="坚果"] { --cat: var(--blue); }
+.snack-card[data-category="罐头"], .today[data-category="罐头"], .snack-dialog__art[data-category="罐头"] { --cat: var(--olive); }
+.snack-card[data-category="膨化"], .today[data-category="膨化"], .snack-dialog__art[data-category="膨化"] { --cat: var(--mustard); }
+.snack-card[data-category="糕点"], .today[data-category="糕点"], .snack-dialog__art[data-category="糕点"] { --cat: var(--brown); }
+.snack-card[data-category="炒货"], .today[data-category="炒货"], .snack-dialog__art[data-category="炒货"] { --cat: var(--olive); }
 
 .empty { border: 1px dashed var(--line-strong); background: var(--card); padding: clamp(44px, 7vw, 76px) 24px; text-align: center; box-shadow: 4px 4px 0 var(--shadow); }
 .empty__icon { display: block; font-family: var(--font-mono); font-size: 30px; color: var(--line-strong); }
@@ -494,12 +495,12 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
 @media (min-width: 1440px) {
   .shell { width: min(1320px, calc(100% - 96px)); }
   .head-inner { min-height: 76px; }
-  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .hero__title { font-size: clamp(3.1rem, 5.2vw, 5.2rem); }
 }
 @media (min-width: 2200px) {
   .shell { width: min(1640px, calc(100% - 120px)); }
-  .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 
 /* ---------- Responsive ---------- */

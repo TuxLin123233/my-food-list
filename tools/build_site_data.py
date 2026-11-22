@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "data" / "snacks.csv"
 OUT_PATH = ROOT / "js" / "data.js"
 
-CATEGORY_ORDER = ["膨化", "饼干", "巧克力", "糖果", "咸味", "坚果"]
+CATEGORY_ORDER = ["冰品 / 饮品", "辣味", "糖果", "罐头", "膨化", "糕点", "炒货"]
 FAVORITE = {"常备", "会回购"}
 
 
@@ -37,7 +37,7 @@ def main():
     brands = {snack["brand"] for snack in snacks if snack["brand"]}
     favorites = sum(1 for snack in snacks if snack["repurchase"] in FAVORITE)
     data = {
-        "title": "LinSifan 的零食柜",
+        "title": "零食柜",
         "subtitle": "有包装的、会反复买的",
         "updated": date.today().isoformat(),
         "categories": categories,
