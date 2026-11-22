@@ -605,6 +605,11 @@ html[data-theme="dark"] .snack-box::before { border-color: rgba(244,236,224,.2);
 .footer__links a { color: var(--foot-muted); text-decoration: none; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--foot-line); }
 .footer__links a:hover { background: var(--lemon); color: var(--ink); }
 .footer__year { white-space: nowrap; }
+.footer__copy {
+  margin: 16px 0 0; padding-top: 14px; border-top: 1px dashed var(--foot-line);
+  font-family: var(--font-mono); font-size: 8px; line-height: 1.7;
+  letter-spacing: .02em; color: var(--foot-muted);
+}
 
 /* ---------- To top ---------- */
 

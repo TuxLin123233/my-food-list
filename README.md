@@ -105,6 +105,11 @@ python3 -m http.server 8000
 - 数据：CSV → JSON（`tools/build_site_data.py`）
 - 部署：GitHub Pages
 
+## 版权
+
+- 页面文字、视觉设计与 SVG/图形插画：© 2026 Lin Sifan，仅作个人收藏记录，未经许可请勿转载。
+- 代码部分：以 [MIT License](LICENSE) 开源，可自由使用、修改和分发代码。
+
 ## 说明
 
 价格和购买地会随时间和门店变化，仅作记录。
