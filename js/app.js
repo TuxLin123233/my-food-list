@@ -172,12 +172,14 @@
       <article class="snack-box" data-id="${esc(snack.id)}" data-category="${esc(snack.category)}"
         tabindex="0" role="button" aria-label="打开 ${esc(snack.name)}"
         style="--tilt:${TILTS[index % TILTS.length]}deg">
+        <span class="snack-box__lid" aria-hidden="true"></span>
         <span class="snack-box__tape" aria-hidden="true"></span>
         <span class="snack-box__category">${esc(snack.category)}</span>
         <span class="snack-box__open" aria-hidden="true">OPEN ↗</span>
         <div class="snack-box__label">
           <span class="snack-box__name">${esc(artLabel(snack))}</span>
           <span class="snack-box__brand">${esc(snack.brand)}</span>
+          <span class="snack-box__barcode" aria-hidden="true"></span>
         </div>
         <div class="snack-box__foot">
           <span class="rating" aria-label="评分 ${esc(snack.rating)} 分">${ratingHTML(snack.rating)}</span>
