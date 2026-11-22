@@ -48,7 +48,7 @@
   };
 
   const els = {
-    grid: $("#grid"),
+    shelfUnit: $("#shelf-unit"),
     empty: $("#empty"),
     emptyReset: $("#empty-reset"),
     resultCount: $("#result-count"),
@@ -157,27 +157,29 @@
 
   /* ---------- render ---------- */
 
-  function cardHTML(snack, index) {
+  function columns() {
+    if (window.innerWidth >= 1080) return 4;
+    if (window.innerWidth >= 700) return 3;
+    return 2;
+  }
+
+  const TILTS = [0, 0, 0, 0, 0, 0];
+
+  function boxHTML(snack, index) {
     return `
-      <article class="snack-card" data-id="${esc(snack.id)}" data-category="${esc(snack.category)}"
-        data-reveal tabindex="0" role="button" aria-label="查看 ${esc(snack.name)} 详情" style="--i:${index % 12}">
-        <span class="snack-card__tape" aria-hidden="true"></span>
-        <div class="snack-card__art">
-          <span class="snack-card__art-brand">${esc(artLabel(snack))}</span>
-          <span class="snack-card__art-sub">PACKAGED SNACK</span>
-          <span class="snack-card__category">${esc(snack.category)}</span>
-          <span class="snack-card__no">NO. ${esc(snack.id)}</span>
+      <article class="snack-box" data-id="${esc(snack.id)}" data-category="${esc(snack.category)}"
+        tabindex="0" role="button" aria-label="打开 ${esc(snack.name)}"
+        style="--tilt:${TILTS[index % TILTS.length]}deg">
+        <span class="snack-box__tape" aria-hidden="true"></span>
+        <span class="snack-box__category">${esc(snack.category)}</span>
+        <span class="snack-box__open" aria-hidden="true">OPEN ↗</span>
+        <div class="snack-box__label">
+          <span class="snack-box__name">${esc(artLabel(snack))}</span>
+          <span class="snack-box__brand">${esc(snack.brand)}</span>
         </div>
-        <div class="snack-card__body">
-          <h3 class="snack-card__title">${esc(snack.name)}</h3>
-          <p class="snack-card__brand">${esc(snack.brand)}</p>
-          <div class="rating snack-card__rating" aria-label="评分 ${esc(snack.rating)} 分">${ratingHTML(snack.rating)}</div>
-          <p class="snack-card__note">${esc(snack.note)}</p>
-          <div class="snack-card__tags">${(snack.tags || []).map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
-          <div class="snack-card__foot">
-            <span class="stamp" data-repurchase="${esc(snack.repurchase)}">${esc(snack.repurchase)}</span>
-            <span class="snack-card__price">${esc(snack.price)}</span>
-          </div>
+        <div class="snack-box__foot">
+          <span class="rating" aria-label="评分 ${esc(snack.rating)} 分">${ratingHTML(snack.rating)}</span>
+          <span class="snack-box__no">NO. ${esc(snack.id)}</span>
         </div>
       </article>`;
   }
@@ -188,16 +190,27 @@
     if (state.category !== "all") bits.push(state.category);
     if (state.query.trim()) bits.push(`“${state.query.trim()}”`);
     els.resultCount.textContent = bits.length
-      ? `找到 ${count} 包 · ${bits.join(" · ")}`
-      : `共 ${total} 包 · 只收有包装的、会反复买的`;
+      ? `找到 ${count} 盒 · ${bits.join(" · ")}`
+      : `共 ${total} 盒 · 只收有包装的、会反复买的`;
   }
 
   function render() {
     const list = getFiltered();
-    els.grid.innerHTML = list.map(cardHTML).join("");
+    const cols = columns();
+    const rows = [];
+    for (let index = 0; index < list.length; index += cols) {
+      rows.push(list.slice(index, index + cols));
+    }
+    els.shelfUnit.innerHTML = rows.map((row, rowIndex) => `
+      <div class="shelf-row" data-reveal style="--i:${rowIndex}">
+        <div class="shelf-row__boxes" style="--cols:${cols}">
+          ${row.map((snack, index) => boxHTML(snack, index)).join("")}
+        </div>
+        <div class="shelf-row__plank" aria-hidden="true"></div>
+      </div>`).join("");
     els.empty.hidden = list.length > 0;
     updateResultCount(list.length);
-    observeReveals(els.grid);
+    observeReveals(els.shelfUnit);
   }
 
   function renderChips() {
@@ -233,9 +246,18 @@
   }
 
   function spinToday() {
-    if (!DATA.snacks.length) return;
-    const snack = DATA.snacks[Math.floor(Math.random() * DATA.snacks.length)];
+    const pool = getFiltered();
+    if (!pool.length) return;
+    const snack = pool[Math.floor(Math.random() * pool.length)];
     setToday(snack);
+    const box = els.shelfUnit && els.shelfUnit.querySelector(`.snack-box[data-id="${snack.id}"]`);
+    if (box) {
+      box.classList.remove("is-picked");
+      void box.offsetWidth;
+      box.classList.add("is-picked");
+      clearTimeout(box._pickedTimer);
+      box._pickedTimer = setTimeout(() => box.classList.remove("is-picked"), 1600);
+    }
   }
 
   /* ---------- dialog ---------- */
@@ -361,17 +383,17 @@
       render();
     });
 
-    els.grid.addEventListener("click", (event) => {
-      const card = event.target.closest(".snack-card");
-      if (card) openDialog(card.dataset.id);
+    els.shelfUnit.addEventListener("click", (event) => {
+      const box = event.target.closest(".snack-box");
+      if (box) openDialog(box.dataset.id);
     });
 
-    els.grid.addEventListener("keydown", (event) => {
+    els.shelfUnit.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
-      const card = event.target.closest(".snack-card");
-      if (!card) return;
+      const box = event.target.closest(".snack-box");
+      if (!box) return;
       event.preventDefault();
-      openDialog(card.dataset.id);
+      openDialog(box.dataset.id);
     });
 
     els.random.addEventListener("click", spinToday);
@@ -407,6 +429,16 @@
 
     window.addEventListener("scroll", () => {
       els.toTop.classList.toggle("is-visible", window.scrollY > 700);
+    }, { passive: true });
+
+    let lastColumns = columns();
+    let resizeTimer = 0;
+    window.addEventListener("resize", () => {
+      const next = columns();
+      if (next === lastColumns) return;
+      lastColumns = next;
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(render, 140);
     }, { passive: true });
 
     document.addEventListener("keydown", (event) => {
