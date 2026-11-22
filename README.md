@@ -3,7 +3,7 @@
 > Lin Sifan 的包装零食档案 · 只收有包装的、会反复买的零食。
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-online-c5533b?style=flat-square)
-![Snacks](https://img.shields.io/badge/snacks-8-2b241a?style=flat-square)
+![Snacks](https://img.shields.io/badge/snacks-11-2b241a?style=flat-square)
 ![Categories](https://img.shields.io/badge/categories-7-2b241a?style=flat-square)
 ![Vanilla JS](https://img.shields.io/badge/vanilla-JS-2b241a?style=flat-square)
 
@@ -17,9 +17,12 @@
 
 一个只收集**有包装零食**的个人档案：冰品和饮品、辣味、糖果、罐头、膨化、糕点、炒货。不收录餐厅，也不收录自己做的菜。
 
-目前收了 8 样：
+目前收了 11 样：
 
-- 蜜雪冰城（冰激凌、冰/热美式、无糖、蜜桃四季春）
+- 蜜雪冰城 冰激凌
+- 蜜雪冰城 冰美式（无糖）
+- 蜜雪冰城 热美式（无糖）
+- 蜜雪冰城 蜜桃四季春
 - 麻辣王子 · 微麻微辣
 - 小样酸Q糖
 - 粤花牌榄角鲮鱼罐头
@@ -32,11 +35,12 @@
 
 ## 功能
 
-- 8 样零食，7 个分类
+- 11 样零食，7 个分类
 - 搜索名字 / 品牌 / 口味 / 笔记
 - 分类筛选、按最近记录 / 评分 / 名字 / 分类排序
 - 「抽一包」随机推荐，今日推荐卡片可点开详情
-- 手账风卡片：纸胶带、硬边影子、包装线稿、评分与回购印章
+- 奶油底、低饱和贴纸卡片：纸胶带、硬边影子、分类小色标、评分与回购印章
+- 纯文字标签卡，不使用图标
 - 白天 / 夜宵两套主题，自动记住选择
 - 手机端适配，详情弹窗
 - 页脚显示最后更新日期
@@ -80,7 +84,6 @@ CSV 字段：
 | `date` | 首次记录日期 `YYYY-MM-DD` |
 | `tags` | 标签，用 `\|` 分隔 |
 | `note` | 一句吃后感 |
-| `pack` | 包装线稿：`drink` / `can` / `cake` / `chips` / `biscuit` / `chocolate` / `candy` / `nuts` / `savory` |
 
 新增分类时，把分类名加进 `tools/build_site_data.py` 的 `CATEGORY_ORDER`，并在 `css/style.css` 的分类色里补一条。
 
@@ -95,10 +98,10 @@ python3 -m http.server 8000
 ## 技术栈
 
 - 原生 HTML / CSS / JavaScript，无框架、无构建依赖
-- 包装插画为内联 SVG 线稿，不依赖外部图片
+- 卡片使用纯色块与文字标签，不依赖图标或外部图片
 - 数据：CSV → JSON（`tools/build_site_data.py`）
 - 部署：GitHub Pages
 
 ## 说明
 
-包装线稿是通用插画，不代表具体产品包装；价格和购买地会随时间和门店变化，仅作记录。
+价格和购买地会随时间和门店变化，仅作记录。

@@ -63,7 +63,7 @@
     reroll: $("#reroll"),
     today: $(".today"),
     todayOpen: $("#today-open"),
-    todayPack: $("#today-pack"),
+    todayBrandmark: $("#today-brandmark"),
     todayTitle: $("#today-title"),
     todayBrand: $("#today-brand"),
     todayNote: $("#today-note"),
@@ -73,7 +73,7 @@
     dialog: $("#snack-dialog"),
     dialogClose: $("#dialog-close"),
     dialogArt: $("#dialog-art-wrap"),
-    dialogPack: $("#dialog-pack"),
+    dialogBrandmark: $("#dialog-brandmark"),
     dialogIndex: $("#dialog-index"),
     dialogTitle: $("#dialog-title"),
     dialogBrand: $("#dialog-brand"),
@@ -95,95 +95,16 @@
   let searchTimer = 0;
   let toastTimer = 0;
 
-  /* ---------- pack illustrations ---------- */
+  /* ---------- rating ---------- */
 
-  const PACK_ART = {
-    chips: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <path d="M36 34h88l8 68-14 14H44L30 102Z" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M30 34h100l-8 13H38Z" fill="var(--cat)" opacity=".36" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-        <path d="M44 34v-8M54 34v-8M64 34v-8M74 34v-8M84 34v-8M94 34v-8M104 34v-8M114 34v-8" stroke="currentColor" stroke-width="1" opacity=".55"/>
-        <circle cx="80" cy="76" r="23" fill="var(--card)" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M72 76h16M80 68v16" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M50 101h18M72 108h20M97 99h14" stroke="currentColor" stroke-width="1" opacity=".45"/>
-      </svg>`,
-    biscuit: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <rect x="42" y="26" width="76" height="94" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M42 40h76" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M50 26v14M110 26v14" stroke="currentColor" stroke-width="1.4"/>
-        <circle cx="80" cy="80" r="25" fill="var(--card)" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="72" cy="72" r="1.6" fill="currentColor"/><circle cx="88" cy="72" r="1.6" fill="currentColor"/>
-        <circle cx="72" cy="88" r="1.6" fill="currentColor"/><circle cx="88" cy="88" r="1.6" fill="currentColor"/>
-        <path d="M66 80h28" stroke="currentColor" stroke-width="1" opacity=".45"/>
-      </svg>`,
-    chocolate: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <g transform="rotate(-5 80 70)">
-          <rect x="34" y="34" width="92" height="76" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M34 46h92" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M34 86h92" stroke="currentColor" stroke-width="1"/>
-          <path d="M60 46v40M86 46v40M112 46v40" stroke="currentColor" stroke-width="1" opacity=".6"/>
-          <path d="M40 40h18v2H40Z" fill="var(--cat)" opacity=".5"/>
-          <path d="M46 102h68" stroke="currentColor" stroke-width="1" opacity=".45"/>
-        </g>
-      </svg>`,
-    candy: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <path d="M46 52 26 38v56l20-14Z" fill="var(--cat)" opacity=".2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M114 52l20-14v56l-20-14Z" fill="var(--cat)" opacity=".2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <rect x="46" y="52" width="68" height="28" rx="6" fill="var(--cat)" opacity=".35" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M62 52v28M98 52v28" stroke="currentColor" stroke-width="1" opacity=".5"/>
-        <path d="M72 66h16" stroke="currentColor" stroke-width="1.2"/>
-      </svg>`,
-    nuts: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <path d="M48 28h64l7 88H41Z" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M44 40h72" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
-        <ellipse cx="68" cy="72" rx="10" ry="13" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
-        <ellipse cx="92" cy="82" rx="10" ry="13" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
-        <ellipse cx="78" cy="102" rx="10" ry="13" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M64 66l4 6M88 76l4 6M74 96l4 6" stroke="currentColor" stroke-width="1" opacity=".5"/>
-      </svg>`,
-    drink: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <path d="M54 42h52l-7 72H61Z" fill="var(--cat)" opacity=".18" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M48 42h64l-4 12H52Z" fill="var(--cat)" opacity=".38" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-        <path d="M34 42h92" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M88 42 108 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-        <circle cx="80" cy="76" r="16" fill="var(--card)" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M72 76h16M80 70v12" stroke="currentColor" stroke-width="1.1"/>
-        <path d="M69 103h22" stroke="currentColor" stroke-width="1" opacity=".45"/>
-      </svg>`,
-    can: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <ellipse cx="80" cy="32" rx="34" ry="9" fill="var(--cat)" opacity=".35" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M46 32v72c0 5 15 9 34 9s34-4 34-9V32" fill="var(--cat)" opacity=".16" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M46 48h68M46 94h68" stroke="currentColor" stroke-width="1" opacity=".5"/>
-        <path d="M68 26h24M74 22h12" stroke="currentColor" stroke-width="1.4" opacity=".7"/>
-        <rect x="60" y="62" width="40" height="20" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M70 72h20" stroke="currentColor" stroke-width="1"/>
-      </svg>`,
-    cake: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <path d="M44 60h72v48H44Z" fill="var(--cat)" opacity=".16" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M44 60c0-8 8-14 18-14h36c10 0 18 6 18 14" fill="var(--cat)" opacity=".35" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M44 74h72M44 88h72" stroke="currentColor" stroke-width="1" opacity=".5"/>
-        <path d="M60 46v-6M80 46v-8M100 46v-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="80" cy="100" r="5" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/>
-      </svg>`,
-    savory: `
-      <svg viewBox="0 0 160 140" aria-hidden="true">
-        <rect x="40" y="32" width="80" height="84" fill="var(--cat)" opacity=".17" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M40 46h80M40 102h80" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M48 58h64M48 66h64M48 74h64M48 82h64M48 90h64" stroke="currentColor" stroke-width=".9" opacity=".38"/>
-        <path d="M56 38h12M56 108h22M104 38h6" stroke="currentColor" stroke-width="1" opacity=".5"/>
-        <circle cx="80" cy="74" r="12" fill="var(--card)" stroke="currentColor" stroke-width="1.2" opacity=".8"/>
-      </svg>`,
-  };
-
-  function packArt(type) {
-    return PACK_ART[type] || PACK_ART.chips;
+  function artLabel(snack) {
+    const name = String(snack.name || "").trim();
+    const brand = String(snack.brand || "").trim();
+    if (brand && name.startsWith(brand)) {
+      const rest = name.slice(brand.length).trim();
+      if (rest) return rest;
+    }
+    return name;
   }
 
   function ratingHTML(rating) {
@@ -204,7 +125,7 @@
       els.themeToggle.setAttribute("aria-label", label);
       els.themeToggle.title = label;
     }
-    if (els.metaTheme) els.metaTheme.setAttribute("content", isDark ? "#1b1813" : "#f7f0e1");
+    if (els.metaTheme) els.metaTheme.setAttribute("content", isDark ? "#22201c" : "#fbf6ec");
     if (persist) localStorage.setItem("snack-theme", state.theme);
   }
 
@@ -242,7 +163,8 @@
         data-reveal tabindex="0" role="button" aria-label="查看 ${esc(snack.name)} 详情" style="--i:${index % 12}">
         <span class="snack-card__tape" aria-hidden="true"></span>
         <div class="snack-card__art">
-          <span class="snack-card__pack">${packArt(snack.pack)}</span>
+          <span class="snack-card__art-brand">${esc(artLabel(snack))}</span>
+          <span class="snack-card__art-sub">PACKAGED SNACK</span>
           <span class="snack-card__category">${esc(snack.category)}</span>
           <span class="snack-card__no">NO. ${esc(snack.id)}</span>
         </div>
@@ -295,7 +217,7 @@
   function setToday(snack) {
     state.todayId = snack.id;
     els.today.dataset.category = snack.category;
-    els.todayPack.innerHTML = packArt(snack.pack);
+    els.todayBrandmark.textContent = artLabel(snack);
     els.todayTitle.textContent = snack.name;
     els.todayBrand.textContent = snack.brand;
     els.todayNote.textContent = snack.note;
@@ -324,7 +246,7 @@
     state.dialogId = snack.id;
 
     els.dialogArt.dataset.category = snack.category;
-    els.dialogPack.innerHTML = packArt(snack.pack);
+    els.dialogBrandmark.textContent = artLabel(snack);
     els.dialogIndex.textContent = `NO. ${snack.id}`;
     els.dialogTitle.textContent = snack.name;
     els.dialogBrand.textContent = snack.brand;

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="零食柜 · Lin Sifan 的包装零食档案。只收有包装的、会反复买的零食。">
-  <meta name="theme-color" content="#f7f0e1">
+  <meta name="theme-color" content="#fbf6ec">
   <meta property="og:title" content="零食柜 · Lin Sifan 的包装零食档案">
   <meta property="og:description" content="只收有包装的、会反复买的零食。">
   <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>零食柜 · Lin Sifan 的包装零食档案</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=20261122-4">
+  <link rel="stylesheet" href="css/style.css?v=20261122-7">
 </head>
 <body>
   <header class="site-head">
@@ -48,10 +48,10 @@
           <a class="btn btn--line" href="#shelf">翻收藏 →</a>
         </div>
         <dl class="stats" aria-label="零食柜统计">
-          <div class="stat"><dt>零食</dt><dd data-count="8" data-stat="snacks">0</dd></div>
+          <div class="stat"><dt>零食</dt><dd data-count="11" data-stat="snacks">0</dd></div>
           <div class="stat"><dt>品牌</dt><dd data-count="7" data-stat="brands">0</dd></div>
           <div class="stat"><dt>分类</dt><dd data-count="7" data-stat="categories">0</dd></div>
-          <div class="stat"><dt>常驻</dt><dd data-count="7" data-stat="favorites">0</dd></div>
+          <div class="stat"><dt>常驻</dt><dd data-count="9" data-stat="favorites">0</dd></div>
         </dl>
       </div>
 
@@ -59,8 +59,9 @@
         <span class="today__tape" aria-hidden="true"></span>
         <p class="today__label">TODAY'S PICK · 今日推荐</p>
         <button class="today__art" id="today-open" type="button" aria-label="查看今日推荐的零食">
-          <span class="today__pack" id="today-pack"></span>
-          <span class="today__category" id="today-category">膨化</span>
+          <span class="today__art-brand" id="today-brandmark">蜜雪冰城</span>
+          <span class="today__art-sub">PACKAGED SNACK</span>
+          <span class="today__category" id="today-category">冰品 / 饮品</span>
           <span class="today__no" id="today-no">NO. 001</span>
           <span class="today__doodle" aria-hidden="true">yum!</span>
         </button>
@@ -149,8 +150,9 @@
       <button class="snack-dialog__close" id="dialog-close" type="button" aria-label="关闭">×</button>
       <div class="snack-dialog__art" id="dialog-art-wrap">
         <span class="snack-dialog__tape" aria-hidden="true"></span>
-        <span class="snack-dialog__pack" id="dialog-pack"></span>
-        <span class="snack-dialog__category" id="dialog-category">膨化</span>
+        <span class="snack-dialog__art-brand" id="dialog-brandmark">蜜雪冰城</span>
+        <span class="snack-dialog__art-sub">PACKAGED SNACK</span>
+        <span class="snack-dialog__category" id="dialog-category">冰品 / 饮品</span>
         <span class="snack-dialog__doodle" aria-hidden="true">yum!</span>
       </div>
       <div class="snack-dialog__info">
@@ -173,7 +175,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/data.js?v=20261122-4"></script>
-  <script src="js/app.js?v=20261122-4"></script>
+  <script src="js/data.js?v=20261122-7"></script>
+  <script src="js/app.js?v=20261122-7"></script>
 </body>
 </html>
